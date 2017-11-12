@@ -1,8 +1,8 @@
 <template>
     <div :style="{backgroundImage: 'url('+movieInfo.backdrop+')'}" class="bg row">
-        <div class="col s10 offset-s1 container">
+        <div class="col m10 s12 offset-m1 container">
           <div class="mainInfo">
-            <a target="_blank" class=" poster" :href="movieInfo.homepage"> <img :src="movieInfo.poster" alt="poster" width="400"></a>
+            <a target="_blank" :href="movieInfo.homepage"> <img class="poster" :src="movieInfo.poster" alt="poster"></a>
             <div class="info">
                 <h1>{{movieInfo.title}}</h1>
                 <ul>
@@ -63,9 +63,9 @@
 
             <div v-if="movieInfo.backdrops.length">
               <div class="word">Backdrops</div>
-              <carousel :perPageCustom="[[100,3]]" :scrollPerPage="true">
+              <carousel :perPageCustom="[[1140,3]]" :scrollPerPage="true">
                 <slide :key="index" v-for="(backdrop, index) in movieInfo.backdrops" class="carousel-item images">
-                  <div class="myImgAndVid"><div class="myBackdrop"><img :src="backdrop" alt=""></div></div>
+                  <div class="backdrops"><img class="myBackdrop" :src="backdrop" alt=""></div>
                 </slide>
               </carousel>
             </div>
@@ -238,8 +238,7 @@ export default {
   width: 60%;
 }
 .poster {
-  margin: 0;
-  padding: 0;
+  width: 400px;
 }
 img {
   border-radius: 10px;
@@ -254,7 +253,15 @@ img {
 .myImg {
   width: auto;
   height: 100%;
-  
+}
+.backdrops{
+  width: 300px;
+  height: 169px;
+  margin: auto;
+}
+.myBackdrop{
+  height: auto;
+  width: 100%;
 }
 
 h1 {
@@ -315,16 +322,56 @@ li {
     width: 50%;
   }
 }
+@media (max-width: 765px){
+  .backdrops{
+  width: 250px;
+
+}
+}
 @media (max-width: 735px){
   .myImgAndVid{
     height:200px;
     width: 133px;
   }
+  .info{
+    width: 80%;
+  }
 }
 @media(max-width: 540px){
   .myImgAndVid{
-    height:110px;
-    width: 73px;
+    /* height:150px; */
+    /* width: 73px; */
+  }
+  .mainInfo{
+    padding-top: 0;
+  }
+  .info{
+    width: 100%;
+  }
+  .overview{
+    width: 100%;
+  }
+}
+@media (max-width:450px){
+  .myImgAndVid{
+    height:150px;
+    width: 100px;
+  }
+}
+@media (max-width:425px){
+  .poster{
+    width: 350px;
+  }
+}
+@media (max-width:375px){
+  .poster{
+    width: 300px;
+  }
+}
+@media (max-width: 340px){
+  .myImgAndVid{
+    height:140px;
+    width: 93px;
   }
 }
 </style>

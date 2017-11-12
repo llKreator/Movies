@@ -49,8 +49,10 @@ export default {
   background-size: cover;
   background-attachment: fixed;
   left: 0;
+  overflow: hidden;
 }
 .container{
   padding: 0;
+  margin: 0;
 }
 </style>
