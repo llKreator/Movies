@@ -1,7 +1,7 @@
 <template>
 <div :style="{backgroundImage: 'url(' + background + ')'}" class='bg'>
     <div class="row">
-        <div class="col s10 offset-s1 ">
+        <div class="container col m10 s12 offset-m1 ">
             <my-header></my-header>
             <my-main></my-main>
         </div>
@@ -49,5 +49,8 @@ export default {
   background-size: cover;
   background-attachment: fixed;
   left: 0;
+}
+.container{
+  padding: 0;
 }
 </style>

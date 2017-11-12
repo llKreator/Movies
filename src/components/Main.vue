@@ -3,7 +3,7 @@
       <!-- <div class="col s10 offset-s1"> -->
         <nav>
             <div class="nav-wrapper">
-                <ul class="hide-on-med-and-down">
+                <ul>
                     <li @click="changeFilter" :class="{active: filter.popular}"><a href="#">Popular</a></li>
                     <li @click="changeFilter" :class="{active: filter.upcoming}"><a href="#">Upcoming</a></li>
                     <li @click="changeFilter" :class="{active: filter.inTheaters}"><a href="#">In Theaters</a></li>

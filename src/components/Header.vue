@@ -3,12 +3,12 @@
     <h1 class="center-align">Movies</h1>
      <div class="row">
        <form  v-on:submit.prevent="search" action="">
-          <div class="input-field col s6 offset-s3 myinp">
+          <div class="input-field col m6 s12 offset-m3 myinp">
             <input v-click-outside="closeSuggestions" autocomplete="off" v-model="myinput" :value="myinput" id="search" type="text" class="validate green-text text-accent-1">
             <label for="search">Search movie</label>
             <transition name="fade">
-            <ul v-if="showSuggestions" class="suggestions">
-              <li @click="selectSuggestion(s.id)" class="suggestion" :key ="s.id" v-for="s in suggestions">
+            <ul v-if="showSuggestions">
+              <li @click="selectSuggestion(s.id)"  :key ="s.id" v-for="s in suggestions">
                 <img :src="s.poster" width="70px" height="100px" alt=""><div class="titleSuggestion">{{s.title}}</div>
               </li>
             </ul>
@@ -121,7 +121,7 @@ h1 {
 ul {
   list-style-type: none;
   position: absolute;
-  width: 400px;
+  width: 72%;
   max-height: 510px;
   overflow: hidden;
   top: 50px;
@@ -161,5 +161,44 @@ a {
 }
 .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0
+}
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+@media (max-width: 600px){
+  ul{
+    max-height:306px;
+    overflow-y:scroll
+  }
 }
 </style>
