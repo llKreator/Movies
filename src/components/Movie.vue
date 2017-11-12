@@ -374,7 +374,7 @@ li {
 }
 @media (max-width:425px){
   .poster{
-    width: 350px;
+    width: 100%;
   }
    .frame{
     width: 330px;
@@ -382,9 +382,6 @@ li {
   }
 }
 @media (max-width:375px){
-  .poster{
-    width: 300px;
-  }
   .frame{
     width: 310px;
     height: 160px;

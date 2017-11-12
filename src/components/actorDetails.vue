@@ -1,6 +1,6 @@
 <template>
 <div class="bg">
-    <div class="col s10 offset-s1 container">
+    <div class="container">
         <img :src="actorPicture" alt="">
         <div class="info">
             <div class="name">{{name}}</div>
@@ -54,10 +54,13 @@ export default {
   background: rgba(50, 50, 50, 0.8);
   display: flex;
   justify-content: space-around;
+  width: 80%;
 }
 img {
   border-radius: 20px;
+  max-width:421px;
   max-height: 632px;
+  align-self: center;
 }
 .info {
   flex-basis: 50%;
@@ -78,5 +81,24 @@ img {
   margin-top: 25px;
   line-height: 200%;
   letter-spacing: 1px;
+  text-align: left;
+}
+@media (max-width:1100px){
+  .container{
+    width: 90%;
+  }
+}
+@media (max-width:950px){
+  .container{
+    flex-direction: column;
+  }
+}
+@media (max-width:500px){
+  .container{
+    width: 100%;
+  }
+  img{
+    width: 300px;
+  }
 }
 </style>
