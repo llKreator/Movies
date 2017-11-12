@@ -45,7 +45,7 @@
             <div class="overview">{{movieInfo.overview}}</div>
             <div v-if="movieInfo.cast.length">
               <div class="word">Cast</div>
-              <carousel v-if="movieInfo.cast" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true">
+              <carousel v-if="movieInfo.cast" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize=5>
                 <slide :key="index" v-for="(actor, index) in movieInfo.cast" class="carousel-item">
                   <div class="myImgAndVid"><img class="myImg" @click="toActorDetails(actor.id)" :title="actor.name + ' - ' + actor.character" :src="actor.profile" alt=""></div>
                 </slide>
@@ -54,7 +54,7 @@
 
             <div v-if="movieInfo.posters.length">
               <div class="word">Posters</div>
-              <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true">
+              <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true"  :paginationPadding="5" :paginationSize=5>
                 <slide :key="index" v-for="(poster, index) in movieInfo.posters" class="carousel-item">
                   <div class="myImgAndVid"><img class="myImg" :src="poster" alt=""></div>
                 </slide>
@@ -63,7 +63,7 @@
 
             <div v-if="movieInfo.backdrops.length">
               <div class="word">Backdrops</div>
-              <carousel :perPageCustom="[[1140,3]]" :scrollPerPage="true">
+              <carousel :perPageCustom="[[1140,3],[100,1],[780,2]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize=5>
                 <slide :key="index" v-for="(backdrop, index) in movieInfo.backdrops" class="carousel-item images">
                   <div class="backdrops"><img class="myBackdrop" :src="backdrop" alt=""></div>
                 </slide>
@@ -71,9 +71,9 @@
             </div>
             <div v-if="movieInfo.videos.length">
               <div class="word">Videos</div>
-              <carousel :perPage="2" :scrollPerPage="true">
+              <carousel :perPageCustom="[[1265,2],[100,1]]" :scrollPerPage="true">
                 <slide :key="index" v-for="(link, index) in movieInfo.videos">
-                  <div class="myImgAndVid"> <iframe :src="link" frameborder="10" width="500" height="250" allowfullscreen></iframe></div>
+                    <iframe :src="link" frameborder="10" class="frame" allowfullscreen></iframe>
                 </slide>
               </carousel>
             </div>
@@ -306,7 +306,7 @@ li {
   align-self: center;
   letter-spacing: 1px;
   line-height: 170%;
-  text-align: center;
+  text-align: left;
 }
 .word {
   text-align: center;
@@ -317,17 +317,23 @@ li {
   letter-spacing: 3px;
   margin-bottom: 30px;
 }
+.frame{
+  width: 500px;
+  height: 250px;
+  margin: auto;
+  display: block;
+}
 @media (max-width: 1245px) {
   .info {
     width: 50%;
   }
 }
-@media (max-width: 765px){
+/* @media (max-width: 765px){
   .backdrops{
   width: 250px;
 
 }
-}
+} */
 @media (max-width: 735px){
   .myImgAndVid{
     height:200px;
@@ -335,6 +341,10 @@ li {
   }
   .info{
     width: 80%;
+  }
+  .frame{
+    width: 400px;
+    height: 200px;
   }
 }
 @media(max-width: 540px){
@@ -357,15 +367,33 @@ li {
     height:150px;
     width: 100px;
   }
+  .frame{
+    width: 370px;
+    height: 185px;
+  }
 }
 @media (max-width:425px){
   .poster{
     width: 350px;
   }
+   .frame{
+    width: 330px;
+    height: 165px;
+  }
 }
 @media (max-width:375px){
   .poster{
     width: 300px;
+  }
+  .frame{
+    width: 310px;
+    height: 160px;
+  }
+}
+@media (max-width: 360px){
+  .frame{
+    width: 290px;
+    height: 145px;
   }
 }
 @media (max-width: 340px){
@@ -373,5 +401,10 @@ li {
     height:140px;
     width: 93px;
   }
+  .backdrops{
+  width: 290px;
 }
+
+}
+
 </style>
