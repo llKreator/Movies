@@ -92,6 +92,10 @@ img {
   .container{
     flex-direction: column;
   }
+  .bio{
+    width: 97%;
+    margin-left: 5px;
+  }
 }
 @media (max-width:500px){
   .container{
