@@ -2,7 +2,7 @@
 <div class="bg">
     <div class="container">
        <a href="http://localhost:8080/#/"><img class="logo" width="100" src="https://www.themoviedb.org/assets/static_cache/9b3f9c24d9fd5f297ae433eb33d93514/images/v4/logos/408x161-powered-by-rectangle-green.png" alt=""></a>
-        <img :src="actorPicture" alt="">
+        <img class="picture" :src="actorPicture" alt="">
         <div class="info">
             <div class="name">{{name}}</div>
             <div class="birthday"><b>Born at:</b> {{birthday}}</div>
@@ -53,6 +53,7 @@ export default {
 }
 .logo{
   margin-left:71%;
+  padding-top: 10px;
   position: fixed;
   z-index: 100;
 }
@@ -62,17 +63,17 @@ export default {
   justify-content: space-around;
   width: 80%;
 }
-img {
+.picture {
   border-radius: 20px;
   max-width:421px;
   max-height: 632px;
-  align-self: center;
+  align-self: top;
   margin-top: 20px;
 }
 .info {
   flex-basis: 50%;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 .name {
   color: greenyellow;
@@ -100,6 +101,9 @@ img {
   .container{
     flex-direction: column;
   }
+  .picture{
+    align-self: center;
+  }
   .bio{
     width: 97%;
     margin-left: 5px;
@@ -109,8 +113,13 @@ img {
   .container{
     width: 100%;
   }
-  img{
+  .picture{
     width: 300px;
+  }
+}
+@media (max-width:365px){
+  .logo{
+    margin-left: 65%;
   }
 }
 </style>

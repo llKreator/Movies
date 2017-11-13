@@ -59,18 +59,18 @@
 
             <div v-if="movieInfo.posters.length">
               <div class="word">Posters</div>
-              <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true"  :paginationPadding="5" :paginationSize=5>
+              <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true"  :paginationPadding="5" :paginationSize="5">
                 <slide :key="index" v-for="(poster, index) in movieInfo.posters" class="carousel-item">
-                  <div class="myImgAndVid"><img class="myImg" :src="poster" alt=""></div>
+                  <div class="myImgAndVid"><a :href="poster.full" tagret="_blank"><img class="myImg" :src="poster.main" alt=""></a></div>
                 </slide>
               </carousel>
             </div>
 
             <div v-if="movieInfo.backdrops.length">
               <div class="word">Backdrops</div>
-              <carousel :perPageCustom="[[1140,3],[100,1],[780,2]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize=5>
+              <carousel :perPageCustom="[[1140,3],[100,1],[780,2]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize="5">
                 <slide :key="index" v-for="(backdrop, index) in movieInfo.backdrops" class="carousel-item images">
-                  <div class="backdrops"><img class="myBackdrop" :src="backdrop" alt=""></div>
+                  <div class="backdrops"><a :href="backdrop.full"><img class="myBackdrop" :src="backdrop.main" alt=""></a></div>
                 </slide>
               </carousel>
             </div>
@@ -178,14 +178,16 @@ export default {
           }
         });
         arr.images.backdrops.forEach(img => {
-          this.movieInfo.backdrops.push(
-            "https://image.tmdb.org/t/p/w300" + img.file_path
-          );
+          this.movieInfo.backdrops.push({
+            main:"https://image.tmdb.org/t/p/w300" + img.file_path,
+            full:"https://image.tmdb.org/t/p/original" + img.file_path
+          });
         });
         arr.images.posters.forEach(img => {
-          this.movieInfo.posters.push(
-            "https://image.tmdb.org/t/p/w185" + img.file_path
-          );
+          this.movieInfo.posters.push({
+            main: "https://image.tmdb.org/t/p/w185" + img.file_path,
+            full: "https://image.tmdb.org/t/p/original" + img.file_path
+          });
         });
         arr.videos.results.map(video => {
           this.movieInfo.videos.push(
@@ -380,6 +382,9 @@ li {
   .frame{
     width: 370px;
     height: 185px;
+  }
+  .logo{
+    margin-left: 65%;
   }
 }
 @media (max-width:425px){

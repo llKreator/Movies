@@ -110,10 +110,11 @@ export default {
   margin: 0;
 }
 h1 {
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   margin: 0;
   font-weight: bold;
   text-align: center;
+  padding-top: 40px;
 }
 
 ul {
