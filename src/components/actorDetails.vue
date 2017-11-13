@@ -1,6 +1,7 @@
 <template>
 <div class="bg">
     <div class="container">
+       <a href="http://localhost:8080/#/"><img class="logo" width="100" src="https://www.themoviedb.org/assets/static_cache/9b3f9c24d9fd5f297ae433eb33d93514/images/v4/logos/408x161-powered-by-rectangle-green.png" alt=""></a>
         <img :src="actorPicture" alt="">
         <div class="info">
             <div class="name">{{name}}</div>
@@ -50,6 +51,11 @@ export default {
 .bg {
   background: rgba(80,120,80,0.2);
 }
+.logo{
+  margin-left:71%;
+  position: fixed;
+  z-index: 100;
+}
 .container {
   background: rgba(50, 50, 50, 0.8);
   display: flex;
@@ -61,10 +67,12 @@ img {
   max-width:421px;
   max-height: 632px;
   align-self: center;
+  margin-top: 20px;
 }
 .info {
   flex-basis: 50%;
   text-align: center;
+  margin-top: 10px;
 }
 .name {
   color: greenyellow;

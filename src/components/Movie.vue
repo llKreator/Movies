@@ -1,6 +1,7 @@
 <template>
     <div :style="{backgroundImage: 'url('+movieInfo.backdrop+')'}" class="bg row">
         <div class="col m10 s12 offset-m1 container">
+          <a @click="toIndex"><img class="logo" width="100" src="https://www.themoviedb.org/assets/static_cache/9b3f9c24d9fd5f297ae433eb33d93514/images/v4/logos/408x161-powered-by-rectangle-green.png" alt=""></a>
           <div class="mainInfo">
             <a target="_blank" :href="movieInfo.homepage"> <img class="poster" :src="movieInfo.poster" alt="poster"></a>
             <div class="info">
@@ -37,6 +38,10 @@
                     <li>
                       <div class="infoName"><pre>Runtime:   </pre></div>
                       <div class="infoValue">{{movieInfo.runtime}}</div>
+                    </li>
+                    <li>
+                      <div class="infoName"><pre>Release date:   </pre></div>
+                      <div class="infoValue">{{movieInfo.releaseDate}}</div>
                     </li>
                 </ul>
             </div>
@@ -77,7 +82,6 @@
                 </slide>
               </carousel>
             </div>
-            <!-- <iframe id=video-about width="910" height="315" src="https://www.youtube.com/embed/bLHW78X1XeE" frameborder="0" allowfullscreen></iframe> -->
         </div>
     </div>
 </div>
@@ -98,8 +102,6 @@ export default {
         overview: null,
         releaseDate: null,
         runtime: null,
-        voteAverage: null,
-        voteCount: null,
         revenue: null,
         budget: null,
         genres: null,
@@ -129,8 +131,6 @@ export default {
         this.movieInfo.overview = arr.overview;
         this.movieInfo.runtime =
           parseInt(arr.runtime / 60) + "h " + arr.runtime % 60 + "m";
-        this.movieInfo.voteAverage = arr.vote_average;
-        this.movieInfo.voteCount = arr.vote_count;
         this.movieInfo.revenue = arr.revenue.toLocaleString() + " $";
         this.movieInfo.budget = arr.budget.toLocaleString() + " $";
         this.movieInfo.genres = arr.genres.map(g => g.name).join(", ");
@@ -198,6 +198,9 @@ export default {
     toActorDetails(id) {
       console.log("ETO ID = " + id);
       this.$router.push({ name: "actorDetails", params: { id } });
+    },
+    toIndex(){
+      this.$router.push({name:'index'})
     }
   },
   created() {
@@ -299,6 +302,7 @@ li {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 .overview {
   color: white;
@@ -322,6 +326,12 @@ li {
   height: 250px;
   margin: auto;
   display: block;
+}
+.logo{
+  margin-left:75%;
+  padding-top: 10px;
+  position: fixed;
+  z-index: 100;
 }
 @media (max-width: 1245px) {
   .info {

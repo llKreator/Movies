@@ -1,6 +1,5 @@
 <template>
     <div id='Main' >
-      <!-- <div class="col s10 offset-s1"> -->
         <nav>
             <div class="nav-wrapper">
                 <ul>
@@ -14,8 +13,6 @@
         <div class="movies"> 
             <div @click="toMovie(movie.id)" :key="index" v-for="(movie, index) in selected" class="movie" :style="{'background': 'url('+movie.poster+')'}"></div>
         </div>
-        
-      <!-- </div> -->
     </div>
 </template>
 

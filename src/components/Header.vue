@@ -1,6 +1,8 @@
 <template>
   <div class="green-text text-accent-1 " id=header>
-    <h1 class="center-align">Movies</h1>
+    <!-- <h1 class="center-align">Movies</h1> -->
+    <a href="#"><img class="logo" width="100" src="https://www.themoviedb.org/assets/static_cache/9b3f9c24d9fd5f297ae433eb33d93514/images/v4/logos/408x161-powered-by-rectangle-green.png" alt=""></a>
+    <h1>Movies</h1>
      <div class="row">
        <form  v-on:submit.prevent="search" action="">
           <div class="input-field col m6 s12 offset-m3 myinp">
@@ -30,7 +32,6 @@ export default {
   name: "Header",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
       myinput: "",
       gottenID: null,
       suggestions: [],
@@ -61,7 +62,6 @@ export default {
           }
         }
       });
-      // this.showSuggestions = true
       this.myinput === ""
         ? (this.showSuggestions = false)
         : (this.showSuggestions = true);
@@ -71,12 +71,10 @@ export default {
     search() {
       this.axios.get(this.url).then(res => {
         this.gottenID = res.data.results[0].id;
-        console.log(this.gottenID);
         this.toMovie();
       });
     },
     toMovie() {
-      console.log(this.gottenID);
       this.$router.push({
         name: "movie",
         params: {
@@ -86,7 +84,6 @@ export default {
     },
     closeSuggestions() {
       this.showSuggestions = false;
-      console.log(this.showSuggestions);
     },
     selectSuggestion(id) {
       this.gottenID = id;
@@ -116,6 +113,7 @@ h1 {
   letter-spacing: 3px;
   margin: 0;
   font-weight: bold;
+  text-align: center;
 }
 
 ul {
@@ -152,15 +150,19 @@ li:hover {
 img {
   z-index: 10;
 }
-
+.logo{
+  margin-left:10px;
+  padding-top: 10px;
+  position: fixed;
+}
 a {
   color: #42b983;
 }
 .fade-leave-active {
-  transition: opacity .5s
+  transition: opacity 0.5s;
 }
-.fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-  opacity: 0
+.fade-leave-to {
+  opacity: 0;
 }
 ::-webkit-scrollbar {
   width: 2px;
@@ -195,10 +197,10 @@ a {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-@media (max-width: 600px){
-  ul{
-    max-height:306px;
-    overflow-y:scroll
+@media (max-width: 600px) {
+  ul {
+    max-height: 306px;
+    overflow-y: scroll;
   }
 }
 </style>
