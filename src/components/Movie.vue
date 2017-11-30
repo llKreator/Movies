@@ -140,7 +140,7 @@ export default {
         videos: []
       },
       isMobile: window.innerWidth < 700,
-      posterWidth: window.innerWidth < 700 ? "130" : "185"
+      posterWidth: window.innerWidth < 700 ? "130" : "150"
     };
   },
   methods: {
