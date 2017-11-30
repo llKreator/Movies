@@ -1,90 +1,112 @@
 <template>
-    <div :style="{backgroundImage: 'url('+movieInfo.backdrop+')'}" class="bg row">
-        <div class="col m10 s12 offset-m1 container">
-          <a @click="toIndex"><img class="logo" width="100" src="https://www.themoviedb.org/assets/static_cache/9b3f9c24d9fd5f297ae433eb33d93514/images/v4/logos/408x161-powered-by-rectangle-green.png" alt=""></a>
-          <div class="mainInfo">
-            <a target="_blank" :href="movieInfo.homepage"> <img class="poster" :src="movieInfo.poster" alt="poster"></a>
-            <div class="info">
-                <h1>{{movieInfo.title}}</h1>
-                <ul>
-                    <li >
-                        <div class="infoName"><pre>Genre:   </pre></div>
-                        <div class="infoValue"> {{movieInfo.genres}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Director:   </pre></div>
-                      <div class="infoValue">{{movieInfo.directors}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Writers:   </pre></div>
-                      <div class="infoValue">{{movieInfo.writers}}</div>
-                    </li>
-                    <li v-if="movieInfo.directorsOfPhotography">
-                      <div class="infoName"><pre>Cinematographer:   </pre></div>
-                      <div class="infoValue">{{movieInfo.directorsOfPhotography}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Composers:   </pre></div>
-                      <div class="infoValue">{{movieInfo.composers}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Budget:   </pre></div>
-                      <div class="infoValue">{{movieInfo.budget}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Revenue:   </pre></div>
-                      <div class="infoValue">{{movieInfo.revenue}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Runtime:   </pre></div>
-                      <div class="infoValue">{{movieInfo.runtime}}</div>
-                    </li>
-                    <li>
-                      <div class="infoName"><pre>Release date:   </pre></div>
-                      <div class="infoValue">{{movieInfo.releaseDate}}</div>
-                    </li>
-                </ul>
-            </div>
+  <div :style="{backgroundImage: isMobile ? '' : 'url('+movieInfo.backdrop+')'}" :class="['bg', 'row', isMobile ? 'bgMobile' : 'bgDesktop']">
+    <div class="col m10 s12 offset-m1 container">
+      <a @click="toIndex"><img class="logo" width="100" src="https://www.themoviedb.org/assets/static_cache/9b3f9c24d9fd5f297ae433eb33d93514/images/v4/logos/408x161-powered-by-rectangle-green.png" alt=""></a>
+      <div class="mainInfo">
+        <a target="_blank" :href="movieInfo.homepage"> <img class="poster" :src="movieInfo.poster" alt="poster"></a>
+        <div class="info">
+          <h1>{{movieInfo.title}}</h1>
+          <ul>
+            <li>
+              <div class="infoName">
+                <pre>Genre:   </pre>
+              </div>
+              <div class="infoValue"> {{movieInfo.genres}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Director:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.directors}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Writers:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.writers}}</div>
+            </li>
+            <li v-if="movieInfo.directorsOfPhotography">
+              <div class="infoName">
+                <pre>Cinematographer:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.directorsOfPhotography}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Composers:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.composers}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Budget:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.budget}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Revenue:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.revenue}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Runtime:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.runtime}}</div>
+            </li>
+            <li>
+              <div class="infoName">
+                <pre>Release date:   </pre>
+              </div>
+              <div class="infoValue">{{movieInfo.releaseDate}}</div>
+            </li>
+          </ul>
         </div>
-        <div class="additionalInfo">
-            <div class="overview">{{movieInfo.overview}}</div>
-            <div v-if="movieInfo.cast.length">
-              <div class="word">Cast</div>
-              <carousel v-if="movieInfo.cast" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize=5>
-                <slide :key="index" v-for="(actor, index) in movieInfo.cast" class="carousel-item">
-                  <div class="myImgAndVid"><img class="myImg" @click="toActorDetails(actor.id)" :title="actor.name + ' - ' + actor.character" :src="actor.profile" alt=""></div>
-                </slide>
-              </carousel>
-            </div>
-
-            <div v-if="movieInfo.posters.length">
-              <div class="word">Posters</div>
-              <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true"  :paginationPadding="5" :paginationSize="5">
-                <slide :key="index" v-for="(poster, index) in movieInfo.posters" class="carousel-item">
-                  <div class="myImgAndVid"><a :href="poster.full" tagret="_blank"><img class="myImg" :src="poster.main" alt=""></a></div>
-                </slide>
-              </carousel>
-            </div>
-
-            <div v-if="movieInfo.backdrops.length">
-              <div class="word">Backdrops</div>
-              <carousel :perPageCustom="[[1140,3],[100,1],[780,2]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize="5">
-                <slide :key="index" v-for="(backdrop, index) in movieInfo.backdrops" class="carousel-item images">
-                  <div class="backdrops"><a :href="backdrop.full"><img class="myBackdrop" :src="backdrop.main" alt=""></a></div>
-                </slide>
-              </carousel>
-            </div>
-            <div v-if="movieInfo.videos.length">
-              <div class="word">Videos</div>
-              <carousel :perPageCustom="[[1265,2],[100,1]]" :scrollPerPage="true">
-                <slide :key="index" v-for="(link, index) in movieInfo.videos">
-                    <iframe :src="link" frameborder="10" class="frame" allowfullscreen></iframe>
-                </slide>
-              </carousel>
-            </div>
+      </div>
+      <div class="additionalInfo">
+        <div class="overview">{{movieInfo.overview}}</div>
+        <div v-if="movieInfo.cast.length">
+          <div class="word">Cast</div>
+          <carousel v-if="movieInfo.cast" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize=5>
+            <slide :key="index" v-for="(actor, index) in movieInfo.cast" class="carousel-item">
+              <div class="myImgAndVid"><img class="myImg" @click="toActorDetails(actor.id)" :title="actor.name + ' - ' + actor.character" :src="actor.profile" alt=""></div>
+            </slide>
+          </carousel>
         </div>
+
+        <div v-if="movieInfo.posters.length">
+          <div class="word">Posters</div>
+          <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize="5">
+            <slide :key="index" v-for="(poster, index) in movieInfo.posters" class="carousel-item">
+              <div class="myImgAndVid">
+                <a :href="poster.full" tagret="_blank"><img class="myImg" :src="poster.main" alt=""></a>
+              </div>
+            </slide>
+          </carousel>
+        </div>
+
+        <div v-if="movieInfo.backdrops.length">
+          <div class="word">Backdrops</div>
+          <carousel :perPageCustom="[[1140,3],[100,1],[780,2]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize="5">
+            <slide :key="index" v-for="(backdrop, index) in movieInfo.backdrops" class="carousel-item images">
+              <div class="backdrops">
+                <a :href="backdrop.full"><img class="myBackdrop" :src="backdrop.main" alt=""></a>
+              </div>
+            </slide>
+          </carousel>
+        </div>
+        <div v-if="movieInfo.videos.length">
+          <div class="word">Videos</div>
+          <carousel :perPageCustom="[[1265,2],[100,1]]" :scrollPerPage="true">
+            <slide :key="index" v-for="(link, index) in movieInfo.videos">
+              <iframe :src="link" frameborder="10" class="frame" allowfullscreen></iframe>
+            </slide>
+          </carousel>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -116,16 +138,17 @@ export default {
         backdrops: [],
         posters: [],
         videos: []
-      }
+      },
+      isMobile: window.innerWidth < 700,
+      posterWidth: window.innerWidth < 700 ? "130" : "185"
     };
   },
   methods: {
     fetchData() {
       this.axios.get(this.urlToGetMovie).then(res => {
         let arr = res.data;
-        console.log(arr);
         this.movieInfo.poster =
-          "https://image.tmdb.org/t/p/w780" + arr.poster_path;
+          "https://image.tmdb.org/t/p/w500" + arr.poster_path;
         this.movieInfo.title = arr.title;
         this.movieInfo.releaseDate = arr.release_date;
         this.movieInfo.overview = arr.overview;
@@ -172,20 +195,24 @@ export default {
             this.movieInfo.cast.push({
               character: actor.character,
               name: actor.name,
-              profile: "https://image.tmdb.org/t/p/w185" + actor.profile_path,
+              profile:
+                "https://image.tmdb.org/t/p/w" +
+                this.posterWidth +
+                actor.profile_path,
               id: actor.id
             });
           }
         });
         arr.images.backdrops.forEach(img => {
           this.movieInfo.backdrops.push({
-            main:"https://image.tmdb.org/t/p/w300" + img.file_path,
-            full:"https://image.tmdb.org/t/p/original" + img.file_path
+            main: "https://image.tmdb.org/t/p/w300" + img.file_path,
+            full: "https://image.tmdb.org/t/p/original" + img.file_path
           });
         });
         arr.images.posters.forEach(img => {
           this.movieInfo.posters.push({
-            main: "https://image.tmdb.org/t/p/w185" + img.file_path,
+            main:
+              "https://image.tmdb.org/t/p/w" + this.posterWidth + img.file_path,
             full: "https://image.tmdb.org/t/p/original" + img.file_path
           });
         });
@@ -194,15 +221,13 @@ export default {
             "https://www.youtube.com/embed/" + video.key
           );
         });
-        console.log(this.movieInfo);
       });
     },
     toActorDetails(id) {
-      console.log("ETO ID = " + id);
       this.$router.push({ name: "actorDetails", params: { id } });
     },
-    toIndex(){
-      this.$router.push({name:'index'})
+    toIndex() {
+      this.$router.push({ name: "index" });
     }
   },
   created() {
@@ -219,9 +244,14 @@ export default {
 .bg {
   width: 100%;
   min-height: 100vh;
+  left: 0;
+}
+.bgDesktop {
   background-size: cover;
   background-attachment: fixed;
-  left: 0;
+}
+.bgMobile {
+  background: #28292b;
 }
 .row {
   margin: 0;
@@ -259,12 +289,12 @@ img {
   width: auto;
   height: 100%;
 }
-.backdrops{
+.backdrops {
   width: 300px;
   height: 169px;
   margin: auto;
 }
-.myBackdrop{
+.myBackdrop {
   height: auto;
   width: 100%;
 }
@@ -323,14 +353,14 @@ li {
   letter-spacing: 3px;
   margin-bottom: 30px;
 }
-.frame{
+.frame {
   width: 500px;
   height: 250px;
   margin: auto;
   display: block;
 }
-.logo{
-  margin-left:75%;
+.logo {
+  margin-left: 75%;
   padding-top: 10px;
   position: fixed;
   z-index: 100;
@@ -346,77 +376,71 @@ li {
 
 }
 } */
-@media (max-width: 735px){
-  .myImgAndVid{
-    height:200px;
+@media (max-width: 735px) {
+  .myImgAndVid {
+    height: 200px;
     width: 133px;
   }
-  .info{
+  .info {
     width: 80%;
   }
-  .frame{
+  .frame {
     width: 400px;
     height: 200px;
   }
 }
-@media(max-width: 540px){
-  .myImgAndVid{
-    /* height:150px; */
-    /* width: 73px; */
-  }
-  .mainInfo{
+@media (max-width: 540px) {
+  .mainInfo {
     padding-top: 0;
   }
-  .info{
+  .info {
     width: 100%;
   }
-  .overview{
+  .overview {
     width: 100%;
   }
 }
-@media (max-width:450px){
-  .myImgAndVid{
-    height:150px;
+@media (max-width: 450px) {
+  .myImgAndVid {
+    height: 150px;
     width: 100px;
   }
-  .frame{
+  .frame {
     width: 370px;
     height: 185px;
   }
-  .logo{
+  .logo {
     margin-left: 65%;
   }
 }
-@media (max-width:425px){
-  .poster{
+@media (max-width: 425px) {
+  .poster {
     width: 100%;
   }
-   .frame{
+  .frame {
     width: 330px;
     height: 165px;
   }
 }
-@media (max-width:375px){
-  .frame{
+@media (max-width: 375px) {
+  .frame {
     width: 310px;
     height: 160px;
   }
 }
-@media (max-width: 360px){
-  .frame{
+@media (max-width: 360px) {
+  .frame {
     width: 290px;
     height: 145px;
   }
 }
-@media (max-width: 340px){
-  .myImgAndVid{
-    height:140px;
+@media (max-width: 340px) {
+  .myImgAndVid {
+    height: 140px;
     width: 93px;
   }
-  .backdrops{
-  width: 290px;
+  .backdrops {
+    width: 290px;
+  }
 }
-
-}
-
 </style>

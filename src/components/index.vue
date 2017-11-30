@@ -1,12 +1,12 @@
 <template>
-<div :style="{backgroundImage: 'url(' + background + ')'}" class='bg'>
+  <div :style="{backgroundImage: isMobile ? '' : 'url(' + background + ')'}" :class="['bg', isMobile ? 'bgMobile' : 'bgDesktop']">
     <div class="row">
-        <div class="container col m10 s12 offset-m1 ">
-            <my-header></my-header>
-            <my-main></my-main>
-        </div>
+      <div class="container col m10 s12 offset-m1 ">
+        <my-header></my-header>
+        <my-main></my-main>
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -23,7 +23,8 @@ export default {
     return {
       background: null,
       url:
-        "https://api.themoviedb.org/3/movie/popular?api_key=f6785433329d39cecf1524248ac70a0f&language=en-US&page=1"
+        "https://api.themoviedb.org/3/movie/popular?api_key=f6785433329d39cecf1524248ac70a0f&language=en-US&page=1",
+      isMobile: window.innerWidth < 700
     };
   },
   methods: {
@@ -32,12 +33,13 @@ export default {
         this.background =
           "https://image.tmdb.org/t/p/original" +
           res.data.results[0].backdrop_path;
-        console.log(res.data.results[0].backdrop_path);
       });
     }
   },
   created() {
-    this.getPopular();
+    if (!this.isMobile) {
+      this.getPopular();
+    }
   }
 };
 </script>
@@ -46,12 +48,17 @@ export default {
 .bg {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-attachment: fixed;
   left: 0;
   overflow: hidden;
 }
-.container{
+.bgDesktop{
+  background-size: cover;
+  background-attachment: fixed;
+}
+.bgMobile{
+  background: #28292b;
+}
+.container {
   padding: 0;
   margin: 0;
 }
