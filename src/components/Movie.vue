@@ -80,7 +80,7 @@
           <carousel v-if="movieInfo.posters" :perPageCustom="[[1220,5],[970,4],[300,3]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize="5">
             <slide :key="index" v-for="(poster, index) in movieInfo.posters" class="carousel-item">
               <div class="myImgAndVid">
-                <a :href="poster.full" tagret="_blank"><img class="myImg" :src="poster.main" alt=""></a>
+                <img @click="showFullImg(poster.full)" class="myImg" :src="poster.main" alt="">
               </div>
             </slide>
           </carousel>
@@ -91,7 +91,7 @@
           <carousel :perPageCustom="[[1140,3],[100,1],[780,2]]" :scrollPerPage="true" :paginationPadding="5" :paginationSize="5">
             <slide :key="index" v-for="(backdrop, index) in movieInfo.backdrops" class="carousel-item images">
               <div class="backdrops">
-                <a :href="backdrop.full"><img class="myBackdrop" :src="backdrop.main" alt=""></a>
+                <img @click="showFullImg(backdrop.full)" class="myBackdrop" :src="backdrop.main" alt="">
               </div>
             </slide>
           </carousel>
@@ -106,6 +106,9 @@
         </div>
       </div>
     </div>
+    <!-- show full img  -->-->
+    <router-view></router-view>
+    <!-- <modal name='modal'>lol</modal> -->
   </div>
 </template>
 
@@ -228,6 +231,10 @@ export default {
     },
     toIndex() {
       this.$router.push({ name: "index" });
+    },
+    async showFullImg(link){
+      await this.$router.push({name: 'showFullImg', params: {link}})
+      // this.$modal.show('modal')
     }
   },
   created() {
